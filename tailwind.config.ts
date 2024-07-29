@@ -28,32 +28,32 @@ module.exports = {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))'
+          DEFAULT: 'hsl(240, 100%, 50%)',  // Bright blue
+          foreground: 'hsl(0, 0%, 100%)'   // White
         },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))'
+          DEFAULT: 'hsl(0, 0%, 80%)',      // Light gray
+          foreground: 'hsl(0, 0%, 0%)'     // Black
         },
         destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))'
+          DEFAULT: 'hsl(0, 100%, 50%)',    // Bright red
+          foreground: 'hsl(0, 0%, 100%)'   // White
         },
         muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))'
+          DEFAULT: 'hsl(30, 20%, 80%)',    // Beige
+          foreground: 'hsl(0, 0%, 0%)'     // Black
         },
         accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))'
+          DEFAULT: 'hsl(120, 100%, 35%)',  // Bright green
+          foreground: 'hsl(0, 0%, 100%)'   // White
         },
         popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))'
+          DEFAULT: 'hsl(30, 20%, 80%)',    // Beige
+          foreground: 'hsl(0, 0%, 0%)'     // Black
         },
         card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))'
+          DEFAULT: 'hsl(0, 0%, 100%)',     // White
+          foreground: 'hsl(0, 0%, 0%)'     // Black
         }
       },
       borderRadius: {
