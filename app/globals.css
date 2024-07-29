@@ -1,14 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .retro-container {
-  background-image: linear-gradient(45deg, #F5F5DC 25%, #FFFAF0 25%, #FFFAF0 50%, #F5F5DC 50%, #F5F5DC 75%, #FFFAF0 75%, #FFFAF0 100%);
+  background-image: linear-gradient(45deg, #fefce8 25%, #fef9c3 25%, #fef9c3 50%, #fefce8 50%, #fefce8 75%, #fef9c3 75%, #fef9c3 100%);
   background-size: 56.57px 56.57px;
 }
 
 .retro-window {
-  box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #888;
+  box-shadow: 4px 4px 0 #1e3a8a;
 }
