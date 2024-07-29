@@ -1,6 +1,5 @@
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
-
 import '@/app/globals.css'
 import { cn } from '@/lib/utils'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
@@ -40,7 +39,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          'font-sans antialiased',
+          'font-retro antialiased bg-retro-background',
           GeistSans.variable,
           GeistMono.variable
         )}
@@ -53,8 +52,22 @@ export default function RootLayout({ children }: RootLayoutProps) {
           disableTransitionOnChange
         >
           <div className="flex flex-col min-h-screen">
-            <Header />
-            <main className="flex flex-col flex-1 bg-muted/50">{children}</main>
+            <Header className="bg-retro-headerBg text-retro-headerText" />
+            <main className="flex flex-col flex-1">
+              <div className="retro-window border-4 border-retro-windowBorder bg-retro-windowBg shadow-retro mx-auto max-w-6xl mt-4 flex-1">
+                <div className="retro-window-header bg-retro-headerBg text-retro-headerText p-1">
+                  App Window
+                </div>
+                <div className="retro-window-content flex h-full">
+                  <div className="w-1/3 bg-retro-sidebarBg text-retro-sidebarText p-4">
+                    {/* Sidebar content can be added here */}
+                  </div>
+                  <div className="w-2/3 bg-retro-windowBg p-4 overflow-auto">
+                    {children}
+                  </div>
+                </div>
+              </div>
+            </main>
           </div>
           <TailwindIndicator />
         </Providers>
