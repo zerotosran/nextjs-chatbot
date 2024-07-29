@@ -1,64 +1,43 @@
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
+import React from 'react';
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
+import '@/app/globals.css';
+import { cn } from '@/lib/utils';
+import { Providers } from '@/components/providers';
 
-import '@/app/globals.css'
-import { cn } from '@/lib/utils'
-import { TailwindIndicator } from '@/components/tailwind-indicator'
-import { Providers } from '@/components/providers'
-import { Header } from '@/components/header'
-import { Toaster } from '@/components/ui/sonner'
-
-export const metadata = {
-  metadataBase: process.env.VERCEL_URL
-    ? new URL(`https://${process.env.VERCEL_URL}`)
-    : undefined,
-  title: {
-    default: 'Next.js AI Chatbot',
-    template: `%s - Next.js AI Chatbot`
-  },
-  description: 'An AI-powered chatbot template built with Next.js and Vercel.',
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png'
-  }
-}
-
-export const viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' }
-  ]
-}
-
-interface RootLayoutProps {
-  children: React.ReactNode
-}
-
-export default function RootLayout({ children }: RootLayoutProps) {
+const RetroLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          'font-sans antialiased',
-          GeistSans.variable,
-          GeistMono.variable
-        )}
-      >
-        <Toaster position="top-center" />
-        <Providers
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="flex flex-col min-h-screen">
-            <Header />
-            <main className="flex flex-col flex-1 bg-muted/50">{children}</main>
+      <body className={cn('font-retro antialiased', GeistSans.variable, GeistMono.variable)}>
+        <Providers attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <div className="retro-container min-h-screen bg-beige text-black p-4">
+            <div className="retro-header flex justify-between items-center mb-4">
+              <div className="retro-title text-2xl font-bold">RETRO COMPUTER</div>
+              <div className="retro-icons flex space-x-2">
+                <span>🕒</span>
+                <span>📁</span>
+                <span>🔊</span>
+              </div>
+            </div>
+            <div className="retro-window border-2 border-gray-700 p-2 mb-4">
+              <div className="retro-window-header bg-blue-800 text-white p-1 mb-2">App Window</div>
+              <div className="retro-window-content bg-white p-2">
+                {children}
+              </div>
+            </div>
+            <div className="retro-taskbar flex justify-between items-center bg-gray-300 p-2">
+              <button className="retro-button bg-gray-400 px-2 py-1">Start</button>
+              <div className="retro-icons flex space-x-2">
+                <span>📂</span>
+                <span>🖨️</span>
+                <span>🔍</span>
+              </div>
+            </div>
           </div>
-          <TailwindIndicator />
         </Providers>
       </body>
     </html>
-  )
-}
+  );
+};
+
+export default RetroLayout;
