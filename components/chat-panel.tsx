@@ -34,7 +34,19 @@ export function ChatPanel({
   const { submitUserMessage } = useActions()
   const [shareDialogOpen, setShareDialogOpen] = React.useState(false)
 
-  
+  const exampleMessages = [
+    {
+      heading: 'What are the',
+      subheading: 'normal range of Blood Panel',
+      message: `What are the normal range of blood panel?`
+    },
+    {
+      heading: 'How does my',
+      subheading: 'x - ray image look?',
+      message: 'How does my x - ray image look?'
+    }
+
+  ]
 
   return (
     <div className="fixed inset-x-0 bottom-0 w-full bg-gradient-to-b from-muted/30 from-0% to-muted/30 to-50% duration-300 ease-in-out animate-in dark:from-background/10 dark:from-10% dark:to-background/80 peer-[[data-state=open]]:group-[]:lg:pl-[250px] peer-[[data-state=open]]:group-[]:xl:pl-[300px]">
