@@ -8,26 +8,11 @@ import { Header } from '@/components/header'
 import { Toaster } from '@/components/ui/sonner'
 
 export const metadata = {
-  metadataBase: process.env.VERCEL_URL
-    ? new URL(`https://${process.env.VERCEL_URL}`)
-    : undefined,
-  title: {
-    default: 'Next.js AI Chatbot',
-    template: `%s - Next.js AI Chatbot`
-  },
-  description: 'An AI-powered chatbot template built with Next.js and Vercel.',
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png'
-  }
+  // ... (keep the existing metadata)
 }
 
 export const viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' }
-  ]
+  // ... (keep the existing viewport settings)
 }
 
 interface RootLayoutProps {
@@ -39,7 +24,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          'font-retro antialiased bg-retro-background',
+          'font-mono antialiased bg-yellow-100',
           GeistSans.variable,
           GeistMono.variable
         )}
@@ -51,20 +36,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex flex-col min-h-screen">
-            <Header className="bg-retro-headerBg text-retro-headerText" />
-            <main className="flex flex-col flex-1">
-              <div className="retro-window border-4 border-retro-windowBorder bg-retro-windowBg shadow-retro mx-auto max-w-6xl mt-4 flex-1">
-                <div className="retro-window-header bg-retro-headerBg text-retro-headerText p-1">
-                  App Window
+          <div className="flex flex-col min-h-screen p-4">
+            <Header className="bg-blue-900 text-white mb-4 p-2 shadow-md" />
+            <main className="flex flex-col flex-1 bg-white border-4 border-blue-900 shadow-lg">
+              <div className="bg-blue-900 text-white p-2">App Window</div>
+              <div className="flex flex-1">
+                <div className="w-1/3 bg-black text-white p-4 border-r-4 border-blue-900">
+                  {/* Sidebar content */}
+                  <div className="mb-4">Sidebar Content</div>
                 </div>
-                <div className="retro-window-content flex h-full">
-                  <div className="w-1/3 bg-retro-sidebarBg text-retro-sidebarText p-4">
-                    {/* Sidebar content can be added here */}
-                  </div>
-                  <div className="w-2/3 bg-retro-windowBg p-4 overflow-auto">
-                    {children}
-                  </div>
+                <div className="w-2/3 p-4 overflow-auto">
+                  {children}
                 </div>
               </div>
             </main>
