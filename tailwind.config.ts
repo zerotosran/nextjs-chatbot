@@ -19,55 +19,48 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        sans: ['VT323', 'monospace', 'var(--font-geist-sans)'],
-        mono: ['VT323', 'monospace', 'var(--font-geist-mono)']
+        sans: ['var(--font-geist-sans)'],
+        mono: ['var(--font-geist-mono)']
       },
       colors: {
-        border: '#8b7b8b',
-        input: '#c3c3c3',
-        ring: '#0000a8',
-        background: '#f0e6d2',
-        foreground: '#000000',
+        border: 'hsl(300, 10%, 50%)',
+        input: 'hsl(0, 0%, 80%)',
+        ring: 'hsl(240, 100%, 50%)',
+        background: 'hsl(40, 50%, 90%)',
+        foreground: 'hsl(0, 0%, 0%)',
         primary: {
-          DEFAULT: '#0000a8',
-          foreground: '#ffffff'
+          DEFAULT: 'hsl(240, 100%, 50%)',
+          foreground: 'hsl(0, 0%, 100%)'
         },
         secondary: {
-          DEFAULT: '#c3c3c3',
-          foreground: '#000000'
+          DEFAULT: 'hsl(0, 0%, 80%)',
+          foreground: 'hsl(0, 0%, 0%)'
         },
         destructive: {
-          DEFAULT: '#a80000',
-          foreground: '#ffffff'
+          DEFAULT: 'hsl(0, 100%, 50%)',
+          foreground: 'hsl(0, 0%, 100%)'
         },
         muted: {
-          DEFAULT: '#d8c7b8',
-          foreground: '#000000'
+          DEFAULT: 'hsl(30, 20%, 80%)',
+          foreground: 'hsl(0, 0%, 0%)'
         },
         accent: {
-          DEFAULT: '#00a800',
-          foreground: '#ffffff'
+          DEFAULT: 'hsl(120, 100%, 35%)',
+          foreground: 'hsl(0, 0%, 100%)'
         },
         popover: {
-          DEFAULT: '#d8c7b8',
-          foreground: '#000000'
+          DEFAULT: 'hsl(30, 20%, 80%)',
+          foreground: 'hsl(0, 0%, 0%)'
         },
         card: {
-          DEFAULT: '#ffffff',
-          foreground: '#000000'
+          DEFAULT: 'hsl(0, 0%, 100%)',
+          foreground: 'hsl(0, 0%, 0%)'
         }
       },
       borderRadius: {
-        lg: '0px',
-        md: '0px',
-        sm: '0px'
-      },
-      boxShadow: {
-        sm: '2px 2px 0 #8b7b8b',
-        DEFAULT: '4px 4px 0 #8b7b8b',
-        md: '4px 4px 0 #8b7b8b',
-        lg: '6px 6px 0 #8b7b8b',
-        xl: '8px 8px 0 #8b7b8b',
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)'
       },
       keyframes: {
         'accordion-down': {
@@ -77,16 +70,11 @@ const config: Config = {
         'accordion-up': {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' }
-        },
-        'blink': {
-          '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0' }
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
-        'blink': 'blink 1s step-start infinite'
+        'accordion-up': 'accordion-up 0.2s ease-out'
       }
     }
   },
