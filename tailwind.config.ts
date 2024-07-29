@@ -19,7 +19,8 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['var(--font-geist-sans)'],
-        mono: ['var(--font-geist-mono)']
+        mono: ['var(--font-geist-mono)'],
+        retro: ['Courier', 'monospace'] // Added retro font
       },
       colors: {
         border: 'hsl(var(--border))',
@@ -54,6 +55,18 @@ module.exports = {
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'
+        },
+        // Added retro colors
+        retro: {
+          background: '#fefce8',
+          windowBg: '#ffffff',
+          windowBorder: '#1e3a8a',
+          headerBg: '#1e3a8a',
+          headerText: '#ffffff',
+          sidebarBg: '#000000',
+          sidebarText: '#ffffff',
+          buttonBg: '#000000',
+          buttonText: '#ffffff'
         }
       },
       borderRadius: {
@@ -74,6 +87,10 @@ module.exports = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out'
+      },
+      // Added retro-specific styles
+      boxShadow: {
+        'retro': '4px 4px 0 #1e3a8a',
       }
     }
   },
