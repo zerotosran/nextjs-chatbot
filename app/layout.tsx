@@ -1,46 +1,64 @@
-import React from 'react';
-import '@/app/globals.css';
+import { GeistSans } from 'geist/font/sans'
+import { GeistMono } from 'geist/font/mono'
 
-const RetroChatLayout = ({ children }: { children: React.ReactNode }) => {
+import '@/app/globals.css'
+import { cn } from '@/lib/utils'
+import { TailwindIndicator } from '@/components/tailwind-indicator'
+import { Providers } from '@/components/providers'
+import { Header } from '@/components/header'
+import { Toaster } from '@/components/ui/sonner'
+
+export const metadata = {
+  metadataBase: process.env.VERCEL_URL
+    ? new URL(`https://${process.env.VERCEL_URL}`)
+    : undefined,
+  title: {
+    default: 'Next.js AI Chatbot',
+    template: `%s - Next.js AI Chatbot`
+  },
+  description: 'An AI-powered chatbot template built with Next.js and Vercel.',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png'
+  }
+}
+
+export const viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: 'black' }
+  ]
+}
+
+interface RootLayoutProps {
+  children: React.ReactNode
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <div className="retro-container bg-yellow-100 min-h-screen font-mono">
-      <div className="retro-window border-4 border-blue-900 mx-auto max-w-6xl">
-        <div className="retro-window-header bg-blue-900 text-white p-1">
-          App Window
-        </div>
-        <div className="retro-window-content flex">
-          <div className="w-1/3 bg-black text-white p-4">
-            <div className="border border-white p-2 mb-4">
-              {/* Placeholder for user input or additional info */}
-            </div>
-            {/* Black sidebar content */}
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={cn(
+          'font-sans antialiased',
+          GeistSans.variable,
+          GeistMono.variable
+        )}
+      >
+        <Toaster position="top-center" />
+        <Providers
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex flex-col flex-1 bg-muted/50">{children}</main>
           </div>
-          <div className="w-2/3 bg-white p-4">
-            <div className="border border-gray-300 p-4 mb-4">
-              <h2 className="font-bold mb-2">Welcome to Next.js AI Chatbot!</h2>
-              <p className="text-sm">
-                This is an open source AI chatbot app template built with Next.js, the Vercel AI SDK, and Vercel KV.
-              </p>
-              <p className="text-sm mt-2">
-                It uses React Server Components to combine text with generative UI as output of the LLM. The UI state is synced through the SDK so the model is aware of your interactions as they happen.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 gap-4 mb-4">
-              <div className="bg-black text-white p-2 text-sm">Trending memecoins today?</div>
-              <div className="bg-black text-white p-2 text-sm">BOME right now?</div>
-              <div className="bg-black text-white p-2 text-sm">What is BOME?</div>
-              <div className="bg-black text-white p-2 text-sm">Recent events about BOME?</div>
-            </div>
-            <div className="border border-gray-300 p-2 flex items-center">
-              <span className="mr-2">+</span>
-              <input type="text" placeholder="Send a message..." className="flex-grow bg-transparent outline-none" />
-            </div>
-            {children}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default RetroChatLayout;
+          <TailwindIndicator />
+        </Providers>
+      </body>
+    </html>
+  )
+}
