@@ -1,6 +1,5 @@
-import type { Config } from 'tailwindcss'
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   darkMode: ['class'],
   content: [
     './pages/**/*.{ts,tsx}',
@@ -23,38 +22,38 @@ const config: Config = {
         mono: ['var(--font-geist-mono)']
       },
       colors: {
-        border: 'hsl(300, 10%, 50%)',
-        input: 'hsl(0, 0%, 80%)',
-        ring: 'hsl(240, 100%, 50%)',
-        background: 'hsl(40, 50%, 90%)',
-        foreground: 'hsl(0, 0%, 0%)',
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: 'hsl(240, 100%, 50%)',
-          foreground: 'hsl(0, 0%, 100%)'
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))'
         },
         secondary: {
-          DEFAULT: 'hsl(0, 0%, 80%)',
-          foreground: 'hsl(0, 0%, 0%)'
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))'
         },
         destructive: {
-          DEFAULT: 'hsl(0, 100%, 50%)',
-          foreground: 'hsl(0, 0%, 100%)'
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))'
         },
         muted: {
-          DEFAULT: 'hsl(30, 20%, 80%)',
-          foreground: 'hsl(0, 0%, 0%)'
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))'
         },
         accent: {
-          DEFAULT: 'hsl(120, 100%, 35%)',
-          foreground: 'hsl(0, 0%, 100%)'
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))'
         },
         popover: {
-          DEFAULT: 'hsl(30, 20%, 80%)',
-          foreground: 'hsl(0, 0%, 0%)'
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))'
         },
         card: {
-          DEFAULT: 'hsl(0, 0%, 100%)',
-          foreground: 'hsl(0, 0%, 0%)'
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))'
         }
       },
       borderRadius: {
@@ -80,5 +79,3 @@ const config: Config = {
   },
   plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')]
 }
-
-export default config
