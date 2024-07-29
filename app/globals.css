@@ -5,10 +5,10 @@
 @tailwind utilities;
 
 .retro-container {
-  background-image: linear-gradient(45deg, #F0E68C 25%, #FFF8DC 25%, #FFF8DC 50%, #F0E68C 50%, #F0E68C 75%, #FFF8DC 75%, #FFF8DC 100%);
+  background-image: linear-gradient(45deg, #F5F5DC 25%, #FFFAF0 25%, #FFFAF0 50%, #F5F5DC 50%, #F5F5DC 75%, #FFFAF0 75%, #FFFAF0 100%);
   background-size: 56.57px 56.57px;
 }
 
-.retro-button:hover {
-  background-color: #A9A9A9;
+.retro-window {
+  box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #888;
 }
