@@ -21,6 +21,19 @@ export interface ChatPanelProps {
   scrollToBottom: () => void
 }
 
+const exampleMessages = [
+  {
+    heading: "Example 1",
+    subheading: "This is an example subheading 1",
+    message: "This is an example message 1"
+  },
+  {
+    heading: "Example 2",
+    subheading: "This is an example subheading 2",
+    message: "This is an example message 2"
+  },
+];
+
 export function ChatPanel({
   id,
   title,
@@ -33,20 +46,21 @@ export function ChatPanel({
   const [messages, setMessages] = useUIState<typeof AI>()
   const { submitUserMessage } = useActions()
   const [shareDialogOpen, setShareDialogOpen] = React.useState(false)
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
 
-  const exampleMessages = [
-    {
-      heading: 'What are the',
-      subheading: 'normal range of Blood Panel',
-      message: `What are the normal range of blood panel?`
-    },
-    {
-      heading: 'How does my',
-      subheading: 'x - ray image look?',
-      message: 'How does my x - ray image look?'
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files) {
+      // Handle the file upload logic here
+      console.log('Files uploaded:', files);
     }
+  }
 
-  ]
+  const handlePlusClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  }
 
   return (
     <div className="fixed inset-x-0 bottom-0 w-full bg-gradient-to-b from-muted/30 from-0% to-muted/30 to-50% duration-300 ease-in-out animate-in dark:from-background/10 dark:from-10% dark:to-background/80 peer-[[data-state=open]]:group-[]:lg:pl-[250px] peer-[[data-state=open]]:group-[]:xl:pl-[300px]">
@@ -121,7 +135,22 @@ export function ChatPanel({
         ) : null}
 
         <div className="space-y-4 border-t bg-background px-4 py-2 shadow-lg sm:rounded-t-xl sm:border md:py-4">
-          <PromptForm input={input} setInput={setInput} />
+          <div className="flex items-center space-x-4">
+            <PromptForm input={input} setInput={setInput} />
+            <button
+              type="button"
+              onClick={handlePlusClick}
+              className="inline-flex items-center justify-center rounded-full p-2 text-primary-600 hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
+            >
+              +
+            </button>
+            <input
+              type="file"
+              ref={fileInputRef}
+              style={{ display: 'none' }}
+              onChange={handleFileUpload}
+            />
+          </div>
           <FooterText className="hidden sm:block" />
         </div>
       </div>
