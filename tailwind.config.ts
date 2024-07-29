@@ -1,18 +1,14 @@
 module.exports = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  // ... other configs
   theme: {
     extend: {
       colors: {
-        beige: '#F0E68C',
+        beige: '#F5F5DC',
       },
       fontFamily: {
         retro: ['VT323', 'monospace'],
       },
     },
   },
-  plugins: [],
+  // ... other configs
 }
