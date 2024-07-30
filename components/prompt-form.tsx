@@ -28,8 +28,10 @@ export function PromptForm({
   const router = useRouter()
   const { formRef, onKeyDown } = useEnterSubmit()
   const inputRef = React.useRef<HTMLTextAreaElement>(null)
+  const fileInputRef = React.useRef<HTMLInputElement>(null)
   const { submitUserMessage } = useActions()
   const [_, setMessages] = useUIState<typeof AI>()
+  const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
 
   React.useEffect(() => {
     if (inputRef.current) {
