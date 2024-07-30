@@ -48,7 +48,18 @@ export async function removeChat({ id, path }: { id: string; path: string }) {
       error: 'Unauthorized'
     }
   }
-
+  // In your actions.ts or similar file
+  export async function submitUserMessage(message: string, fileInfo: { name: string, size: number } | null) {
+    // Process the message and file info
+    // You might want to upload the file to a server here and get a URL
+    // Then you can pass this information to your AI model or process it as needed
+    
+    // For now, we'll just return a placeholder response
+    return {
+      id: nanoid(),
+      display: <div>Received message: {message} {fileInfo ? `and file: ${fileInfo.name}` : ''}</div>
+    }
+  }
   //Convert uid to string for consistent comparison with session.user.id
   const uid = String(await kv.hget(`chat:${id}`, 'userId'))
 
