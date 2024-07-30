@@ -29,7 +29,7 @@ export function PromptForm({
   const fileInputRef = React.useRef<HTMLInputElement>(null)
   const { submitUserMessage } = useActions()
   const [_, setMessages] = useUIState<typeof AI>()
-  const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
+  const [fileContent, setFileContent] = React.useState<string | null>(null)
 
   React.useEffect(() => {
     if (inputRef.current) {
@@ -37,11 +37,35 @@ export function PromptForm({
     }
   }, [])
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
-      setSelectedFile(file)
-      setInput(`Uploaded file: ${file.name}`)
+      if (file.type.startsWith('image/')) {
+        const formData = new FormData()
+        formData.append('image', file)
+
+        try {
+          const response = await fetch('/api/describe-image', {
+            method: 'POST',
+            body: formData
+          })
+
+          const data = await response.json()
+          setFileContent(data.description)
+          setInput(`Uploaded image: ${file.name}. Description: ${data.description}`)
+        } catch (error) {
+          console.error('Error describing image:', error)
+          setInput(`Uploaded image: ${file.name}. (Error describing image)`)
+        }
+      } else {
+        const reader = new FileReader()
+        reader.onload = async (e) => {
+          const text = e.target?.result
+          setFileContent(text as string)
+          setInput(`Uploaded file: ${file.name}`)
+        }
+        reader.readAsText(file)
+      }
     }
   }
 
@@ -55,27 +79,20 @@ export function PromptForm({
         }
         const value = input.trim()
         setInput('')
-        if (!value && !selectedFile) return
+        if (!value && !fileContent) return
         
-        // Optimistically add user message UI
         setMessages(currentMessages => [
           ...currentMessages,
           {
             id: nanoid(),
-            display: <UserMessage>{value || `Uploaded: ${selectedFile?.name}`}</UserMessage>
+            display: <UserMessage>{value || `Uploaded file content`}</UserMessage>
           }
         ])
         
-        // Here you would typically upload the file and get a URL or process it
-        // For this example, we'll just pass the file name
-        const fileInfo = selectedFile ? { name: selectedFile.name, size: selectedFile.size } : null
-        
-        // Submit and get response message
-        const responseMessage = await submitUserMessage(value, fileInfo)
+        const responseMessage = await submitUserMessage(value, fileContent)
         setMessages(currentMessages => [...currentMessages, responseMessage])
         
-        // Reset the selected file
-        setSelectedFile(null)
+        setFileContent(null)
       }}
     >
       <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden bg-background px-8 sm:rounded-md sm:border sm:px-12">
@@ -117,7 +134,7 @@ export function PromptForm({
         <div className="absolute right-0 top-[13px] sm:right-4">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button type="submit" size="icon" disabled={input === '' && !selectedFile}>
+              <Button type="submit" size="icon" disabled={input === '' && !fileContent}>
                 <IconArrowElbow />
                 <span className="sr-only">Send message</span>
               </Button>
