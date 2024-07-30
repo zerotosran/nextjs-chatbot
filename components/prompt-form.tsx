@@ -73,16 +73,20 @@ export function PromptForm({
               variant="outline"
               size="icon"
               className="absolute left-0 top-[14px] size-8 rounded-full bg-background p-0 sm:left-4"
-              onClick={() => {
-                router.push('/new')
-              }}
+              onClick={handlePlusClick}
             >
               <IconPlus />
-              <span className="sr-only">New Chat</span>
+              <span className="sr-only">Upload File</span>
             </Button>
           </TooltipTrigger>
-          <TooltipContent>New Chat</TooltipContent>
+          <TooltipContent>Upload File</TooltipContent>
         </Tooltip>
+        <input
+          type="file"
+          ref={fileInputRef}
+          style={{ display: 'none' }}
+          onChange={handleFileUpload}
+        />
         <Textarea
           ref={inputRef}
           tabIndex={0}
