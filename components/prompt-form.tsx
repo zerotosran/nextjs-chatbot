@@ -2,9 +2,7 @@
 
 import * as React from 'react'
 import Textarea from 'react-textarea-autosize'
-
 import { useActions, useUIState } from 'ai/rsc'
-
 import { UserMessage } from './stocks/message'
 import { type AI } from '@/lib/chat/actions'
 import { Button } from '@/components/ui/button'
@@ -39,33 +37,45 @@ export function PromptForm({
     }
   }, [])
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      setSelectedFile(file)
+      setInput(`Uploaded file: ${file.name}`)
+    }
+  }
+
   return (
     <form
       ref={formRef}
       onSubmit={async (e: any) => {
         e.preventDefault()
-
-        // Blur focus on mobile
         if (window.innerWidth < 600) {
           e.target['message']?.blur()
         }
-
         const value = input.trim()
         setInput('')
-        if (!value) return
-
+        if (!value && !selectedFile) return
+        
         // Optimistically add user message UI
         setMessages(currentMessages => [
           ...currentMessages,
           {
             id: nanoid(),
-            display: <UserMessage>{value}</UserMessage>
+            display: <UserMessage>{value || `Uploaded: ${selectedFile?.name}`}</UserMessage>
           }
         ])
-
+        
+        // Here you would typically upload the file and get a URL or process it
+        // For this example, we'll just pass the file name
+        const fileInfo = selectedFile ? { name: selectedFile.name, size: selectedFile.size } : null
+        
         // Submit and get response message
-        const responseMessage = await submitUserMessage(value)
+        const responseMessage = await submitUserMessage(value, fileInfo)
         setMessages(currentMessages => [...currentMessages, responseMessage])
+        
+        // Reset the selected file
+        setSelectedFile(null)
       }}
     >
       <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden bg-background px-8 sm:rounded-md sm:border sm:px-12">
@@ -75,7 +85,7 @@ export function PromptForm({
               variant="outline"
               size="icon"
               className="absolute left-0 top-[14px] size-8 rounded-full bg-background p-0 sm:left-4"
-              onClick={handlePlusClick}
+              onClick={() => fileInputRef.current?.click()}
             >
               <IconPlus />
               <span className="sr-only">Upload File</span>
@@ -86,8 +96,8 @@ export function PromptForm({
         <input
           type="file"
           ref={fileInputRef}
-          style={{ display: 'none' }}
-          onChange={handleFileUpload}
+          className="hidden"
+          onChange={handleFileChange}
         />
         <Textarea
           ref={inputRef}
@@ -107,7 +117,7 @@ export function PromptForm({
         <div className="absolute right-0 top-[13px] sm:right-4">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button type="submit" size="icon" disabled={input === ''}>
+              <Button type="submit" size="icon" disabled={input === '' && !selectedFile}>
                 <IconArrowElbow />
                 <span className="sr-only">Send message</span>
               </Button>
